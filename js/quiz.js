@@ -83,14 +83,14 @@ export const QUIZ_QUESTIONS = [
   },
   {
     id: 8,
-    question: "Qual software de diagramação vetorial moderno foi adotado para substituir o clássico brModelo local?",
+    question: "No brModelo Web, ao especializar CLIENTE em PESSOA_FISICA e PESSOA_JURIDICA, qual opção do dropdown 'Especializar' é a correta?",
     options: [
-      { text: "Draw.io (diagrams.net)", correct: true },
-      { text: "Microsoft Paint", correct: false },
-      { text: "Bloco de Notas do Windows", correct: false },
-      { text: "Corel Draw 10", correct: false }
+      { text: "(t, d) - Total e Disjunta: todo cliente é obrigado a ser um dos tipos e nunca ambos ao mesmo tempo", correct: true },
+      { text: "(p, c) - Parcial e Compartilhada: um cliente pode não ser nenhum tipo ou ser os dois juntos", correct: false },
+      { text: "(t, c) - Total e Compartilhada: todo cliente tem que ser pessoa física e jurídica ao mesmo tempo", correct: false },
+      { text: "(p, d) - Parcial e Disjunta: a maioria dos clientes não possui documentos", correct: false }
     ],
-    explanation: "O Draw.io roda direto no navegador e no VS Code, suporta os símbolos de Peter Chen e exporta em arquivos vetoriais limpos em SVG e PNG."
+    explanation: "Na regra de negócio de clientes, cada registro obrigatoriamente tem que ser Pessoa Física OU Jurídica (Total = t), e nunca os dois simultaneamente (Disjunta = d). Logo, escolhemos (t, d)!"
   },
   {
     id: 9,
@@ -105,13 +105,13 @@ export const QUIZ_QUESTIONS = [
   },
   {
     id: 10,
-    question: "Por que o motor InnoDB do MySQL é mandatório para sistemas de controle de estoque comercial?",
+    question: "Quando definimos um atributo com cardinalidade '(0,n)' (ex: telefone), o que o brModelo Web faz ao converter para o Modelo Lógico?",
     options: [
-      { text: "Porque ele é o único que permite colocar imagens coloridas em tabelas", correct: false },
-      { text: "Porque garante propriedades ACID completas e bloqueio a nível de linha contra saldo negativo", correct: true },
-      { text: "Porque não exige o uso de senhas de acesso", correct: false },
-      { text: "Porque funciona apenas sem conexão com a internet", correct: false }
+      { text: "Guarda todos os números de telefone separados por vírgula na mesma célula da tabela", correct: false },
+      { text: "Cria automaticamente uma nova tabela separada ligada por Chave Estrangeira [FK] para respeitar a 1ª Forma Normal (1FN)", correct: true },
+      { text: "Exclui o atributo telefone por considerá-lo desnecessário", correct: false },
+      { text: "Trava a conversão e obriga o aluno a apagar o atributo", correct: false }
     ],
-    explanation: "O InnoDB suporta transações atômicas seguras (ACID) e Row-Level Locking, garantindo que compras simultâneas não gerem saldo físico negativo no armazém."
+    explanation: "A 1ª Forma Normal (1FN) proíbe atributos multivalorados na mesma coluna. O brModelo Web extrai o campo multivalorado para uma nova tabela própria ligada por Foreign Key!"
   }
 ];

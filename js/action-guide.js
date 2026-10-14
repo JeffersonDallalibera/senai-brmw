@@ -216,25 +216,71 @@ export const ACTION_GUIDES = [
       },
       {
         num: 5,
-        instruction: "No painel direito, defina as regras: <strong>Disjunta (d)</strong> (ou uma ou outra) vs <strong>Sobreposta (o)</strong> (pode ser ambas), e <strong>Total (t)</strong> vs <strong>Parcial (p)</strong>.",
-        badge: "Regras d/o e t/p"
+        instruction: "No painel lateral direito de propriedades, abra o dropdown <strong>'Especializar'</strong> e escolha uma das 4 opções:<br>• <strong>(t, d)</strong>: Total e Disjunta (Mais comum: ou é um ou outro, obrigatório).<br>• <strong>(t, c)</strong>: Total e Compartilhada (Obrigatório ter função, podendo acumular mais de uma).<br>• <strong>(p, d)</strong>: Parcial e Disjunta (Pode ser genérico, mas se tiver tipo, só tem um).<br>• <strong>(p, c)</strong>: Parcial e Compartilhada (Pode ser genérico e pode acumular múltiplos tipos).",
+        badge: "Dropdown Especializar"
       }
     ],
     commonMistake: "Criar o atributo de ID (bolinha preta) e os mesmos atributos comuns repetidos dentro de cada entidade filha. A regra de ouro é: filhas herdam tudo da mãe!",
-    proTip: "No triângulo, a letra 'd' indica que alguém não pode ser Pessoa Física e Jurídica ao mesmo tempo; a letra 't' indica que toda pessoa cadastrada precisa ser de um dos dois tipos.",
+    proTip: "A opção (t, d) é a escolha padrão em 90% dos casos no SENAI: todo cliente tem que ser Física ou Jurídica e nunca os dois!",
     svgPreview: `
       <svg viewBox="0 0 280 130" class="action-preview-svg">
         <rect x="95" y="10" width="90" height="30" rx="3" fill="var(--bg-surface-elevated)" stroke="var(--senai-blue)" stroke-width="2" />
         <text x="140" y="29" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="var(--text-main)">CLIENTE</text>
         <line x1="140" y1="40" x2="140" y2="55" stroke="var(--border-focus)" stroke-width="2" />
         <polygon points="140,55 155,75 125,75" fill="var(--accent-amber-light)" stroke="var(--accent-amber)" stroke-width="2" />
-        <text x="140" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="var(--accent-amber)">d, t</text>
+        <text x="140" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="var(--accent-amber)">t, d</text>
         <line x1="130" y1="75" x2="65" y2="95" stroke="var(--border-focus)" stroke-width="2" />
         <line x1="150" y1="75" x2="215" y2="95" stroke="var(--border-focus)" stroke-width="2" />
         <rect x="20" y="95" width="90" height="28" rx="3" fill="var(--bg-surface-elevated)" stroke="var(--senai-blue)" stroke-width="1.5" />
         <text x="65" y="112" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="var(--text-main)">FISICA</text>
         <rect x="170" y="95" width="90" height="28" rx="3" fill="var(--bg-surface-elevated)" stroke="var(--senai-blue)" stroke-width="1.5" />
         <text x="215" y="112" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="var(--text-main)">JURIDICA</text>
+      </svg>
+    `
+  },
+  {
+    id: "action-cardinalidade-atributo",
+    title: "Como Definir Cardinalidade no Atributo (Opcional vs Multivalorado)",
+    category: "1. Modelagem Conceitual",
+    icon: "🔢",
+    summary: "Configurar se um campo aceita NULL ou se aceita múltiplos telefones (1FN).",
+    steps: [
+      {
+        num: 1,
+        instruction: "Dê um clique sobre o círculo do atributo que você quer configurar (ex: <code>telefone</code> ou <code>complemento</code>).",
+        badge: "Selecionar Círculo"
+      },
+      {
+        num: 2,
+        instruction: "Olhe para o <strong>Painel de Propriedades</strong> na lateral direita da tela do brModelo Web.",
+        badge: "Painel Direito"
+      },
+      {
+        num: 3,
+        instruction: "No campo <strong>Cardinalidade Mínima</strong>, digite ou selecione <code>0</code> (se for opcional/NULL) ou <code>1</code> (se for obrigatório/NOT NULL).",
+        badge: "Mínimo (0 ou 1)"
+      },
+      {
+        num: 4,
+        instruction: "No campo <strong>Cardinalidade Máxima</strong>, escolha <code>1</code> (se aceitar apenas um dado) ou <code>n</code> (se for multivalorado, aceitando vários dados).",
+        badge: "Máximo (1 ou n)"
+      },
+      {
+        num: 5,
+        instruction: "Ao converter para o Modelo Lógico, se a cardinalidade máxima for <code>n</code>, o brModelo Web criará uma <strong>tabela separada</strong> para respeitar a 1ª Forma Normal!",
+        badge: "Efeito 1FN"
+      }
+    ],
+    commonMistake: "Tentar criar vários círculos como 'telefone1', 'telefone2', 'telefone3'. O correto é criar um único círculo 'telefone' com cardinalidade (0,n)!",
+    proTip: "Campos como 'complemento_endereco' devem ser sempre (0,1), pois nem todos moram em condomínio.",
+    svgPreview: `
+      <svg viewBox="0 0 280 110" class="action-preview-svg">
+        <rect x="25" y="30" width="100" height="40" rx="3" fill="var(--bg-surface-elevated)" stroke="var(--senai-blue)" stroke-width="2" />
+        <text x="75" y="54" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="var(--text-main)">CLIENTE</text>
+        <line x1="125" y1="50" x2="190" y2="50" stroke="var(--border-focus)" stroke-width="2" />
+        <circle cx="210" cy="50" r="15" fill="var(--bg-surface-elevated)" stroke="var(--senai-blue)" stroke-width="2" />
+        <circle cx="210" cy="50" r="11" fill="none" stroke="var(--senai-blue)" stroke-width="1.5" />
+        <text x="210" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="var(--text-muted)">telefone (0,n)</text>
       </svg>
     `
   },

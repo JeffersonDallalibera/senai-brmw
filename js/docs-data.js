@@ -140,44 +140,95 @@ export const DOCS_SECTIONS = [
           <strong>Por que a Bolinha Preta é obrigatória?</strong> Se você não definir um identificador único para cada entidade, pessoas com nomes iguais (homônimos como <em>"Lucas da Silva"</em>) misturarão cadastros e compras no banco de dados!
         </div>
       </div>
-
-      <h2>Por que e quando colocar Cardinalidade no Atributo?</h2>
-      <p>Muitos alunos acham que cardinalidade <code>(0,1)</code>, <code>(1,1)</code> ou <code>(0,n)</code> só existe em relacionamentos entre retângulos. Mas colocar <strong>cardinalidade em um atributo</strong> é uma das ferramentas mais poderosas da modelagem!</p>
+    `
+  },
+  {
+    id: "cardinalidade-atributos",
+    category: "2. Passo a Passo no Canvas Conceitual",
+    icon: "🔢",
+    title: "Cardinalidade nos Atributos: Opcional, Obrigatório e Multivalorado",
+    description: "Por que colocar (0,1), (1,1) ou (0,n) em um círculo de atributo e como isso afeta o banco.",
+    content: `
+      <h2>Por que posso colocar Cardinalidade em um Atributo?</h2>
+      <p>Muitos alunos aprendem que cardinalidades como <code>(0,n)</code> ou <code>(1,1)</code> só são usadas nas pontas dos relacionamentos (losangos). No entanto, na notação estendida de Peter Chen e no <strong>brModelo Web</strong>, você pode (e deve!) definir a <strong>cardinalidade do próprio atributo</strong>.</p>
+      
+      <p>A cardinalidade do atributo não responde como duas tabelas conversam, mas sim <strong>duas regras vitais sobre o dado em si</strong>:</p>
 
       <div class="card-grid">
         <div class="feature-card">
           <div class="card-icon">1️⃣</div>
-          <div class="card-title">O Mínimo (0 ou 1): Opcional vs Obrigatório</div>
+          <div class="card-title">Mínimo (0 ou 1): Opcional vs Obrigatório</div>
           <div class="card-desc">
-            • <strong>Mínimo = 0:</strong> O campo é <em>opcional</em> (no banco físico aceita <code>NULL</code>). Ex: <code>complemento_endereco</code>.<br>
-            • <strong>Mínimo = 1:</strong> O campo é <em>obrigatório</em> (no banco físico vira <code>NOT NULL</code>). Ex: <code>nome</code>, <code>cpf</code>.
+            • <strong>Mínimo = 0 (Opcional):</strong> O usuário pode deixar o campo em branco no cadastro. No banco físico MySQL, aceita valor <code>NULL</code>.<br>
+            • <strong>Mínimo = 1 (Obrigatório):</strong> O usuário é obrigado a preencher. No banco físico MySQL, vira <code>NOT NULL</code>.
           </div>
         </div>
         <div class="feature-card">
           <div class="card-icon">2️⃣</div>
-          <div class="card-title">O Máximo (1 ou n): Monovalorado vs Multivalorado</div>
+          <div class="card-title">Máximo (1 ou n): Monovalorado vs Multivalorado</div>
           <div class="card-desc">
-            • <strong>Máximo = 1:</strong> O registro só pode ter <em>um valor</em>. Ex: <code>data_nascimento</code>.<br>
-            • <strong>Máximo = n:</strong> O registro aceita <em>vários valores</em>! Ex: <code>telefone</code> (residencial, celular, recado).
+            • <strong>Máximo = 1 (Monovalorado):</strong> O registro só pode ter um único valor para aquele campo (ex: <code>data_nascimento</code>).<br>
+            • <strong>Máximo = n (Multivalorado):</strong> O mesmo registro pode ter <em>vários valores</em> para aquele campo (ex: <code>telefone</code>, <code>email</code>).
           </div>
         </div>
       </div>
 
-      <h3>As 4 Combinações Possíveis na Prática:</h3>
-      <ul>
-        <li><code>(1,1)</code> ➔ <strong>Obrigatório e Único:</strong> É o padrão da maioria dos campos (ex: <code>cpf</code>).</li>
-        <li><code>(0,1)</code> ➔ <strong>Opcional e Único:</strong> Pode ficar em branco, mas se preencher, tem só 1 (ex: <code>apelido</code>, <code>cnh</code>).</li>
-        <li><code>(0,n)</code> ➔ <strong>Opcional e Multivalorado:</strong> Pode não ter nenhum ou ter vários (ex: <code>telefone</code>).</li>
-        <li><code>(1,n)</code> ➔ <strong>Obrigatório e Multivalorado:</strong> Tem que ter ao menos 1 e pode ter vários (ex: <code>idioma_fluente</code>).</li>
-      </ul>
+      <h2>As 4 Combinações Possíveis na Prática:</h2>
+      <div class="table-container" style="overflow-x: auto; margin: 1.5rem 0;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-subtle); background: var(--bg-surface-elevated);">
+              <th style="padding: 0.75rem;">Notação</th>
+              <th style="padding: 0.75rem;">Classificação</th>
+              <th style="padding: 0.75rem;">Exemplo Prático</th>
+              <th style="padding: 0.75rem;">Efeito no Banco de Dados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem;"><strong>(1,1)</strong></td>
+              <td style="padding: 0.75rem;">Obrigatório e Único</td>
+              <td style="padding: 0.75rem;"><code>cpf</code>, <code>ra_aluno</code></td>
+              <td style="padding: 0.75rem;">Coluna comum com restrição <code>NOT NULL</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem;"><strong>(0,1)</strong></td>
+              <td style="padding: 0.75rem;">Opcional e Único</td>
+              <td style="padding: 0.75rem;"><code>complemento</code>, <code>cnh</code></td>
+              <td style="padding: 0.75rem;">Coluna comum aceitando <code>NULL</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.75rem;"><strong>(0,n)</strong></td>
+              <td style="padding: 0.75rem;">Opcional e Multivalorado</td>
+              <td style="padding: 0.75rem;"><code>telefone</code>, <code>rede_social</code></td>
+              <td style="padding: 0.75rem;">Gera uma <strong>nova tabela separada</strong> (1FN)</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem;"><strong>(1,n)</strong></td>
+              <td style="padding: 0.75rem;">Obrigatório e Multivalorado</td>
+              <td style="padding: 0.75rem;"><code>idioma_fluente</code></td>
+              <td style="padding: 0.75rem;">Gera uma <strong>nova tabela separada</strong> com ao menos 1 registro obrigatório</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
+      <h2>O Efeito Revolucionário na 1ª Forma Normal (1FN):</h2>
       <div class="alert-box alert-tip">
         <span class="alert-icon">⚡</span>
         <div>
-          <strong>O Efeito Mágico no Modelo Lógico (1ª Forma Normal):</strong><br>
-          Bancos relacionais proíbem guardar múltiplos telefones separados por vírgula na mesma célula. Quando você define um atributo com máximo <code>n</code> (ex: <code>telefone (0,n)</code>) e clica em <strong>Converter para Lógico</strong> no brModelo Web, o sistema <strong>cria automaticamente uma tabela separada</strong> (ex: <code>telefone_cliente</code>) com Chave Estrangeira ligada à entidade!
+          <strong>A Regra de Edgar F. Codd:</strong> Em bancos relacionais, uma coluna nunca pode guardar uma lista de valores separados por vírgula (ex: <code>"47999-1111, 47888-2222"</code> em uma única célula de telefone é proibido!).<br><br>
+          Quando você coloca <code>(0,n)</code> em um atributo no brModelo Web e clica em <strong>Converter para Lógico</strong>, o sistema faz algo incrível: ele <strong>arranca o atributo da tabela principal e cria uma nova tabela</strong> (ex: <code>telefone_cliente</code>) com chave estrangeira [FK] ligando de volta para o cliente!
         </div>
       </div>
+
+      <h2>Como Configurar no brModelo Web:</h2>
+      <ol>
+        <li>No Canvas, dê um clique sobre o círculo do atributo desejado.</li>
+        <li>Olhe para o <strong>Painel de Propriedades</strong> na lateral direita da tela.</li>
+        <li>Localize os campos <strong>Cardinalidade Mínima</strong> e <strong>Cardinalidade Máxima</strong>.</li>
+        <li>Defina o mínimo (<code>0</code> ou <code>1</code>) e o máximo (<code>1</code> ou <code>n</code>).</li>
+      </ol>
     `
   },
   {
