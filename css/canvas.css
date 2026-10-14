@@ -1,0 +1,188 @@
+/* ==============================================================================
+   📐 ESTILOS DO CANVAS DE MODELAGEM INTERATIVO (PETER CHEN & RELACIONAL)
+   ============================================================================== */
+
+.diagram-svg {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+/* Elementos de Peter Chen */
+.node-entity {
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.node-entity:hover rect {
+  stroke-width: 2.5px;
+  stroke: var(--accent-cyan);
+  filter: drop-shadow(0 4px 8px rgba(2, 132, 199, 0.25));
+}
+
+.node-entity rect {
+  fill: var(--bg-surface);
+  stroke: var(--senai-blue);
+  stroke-width: 2px;
+  rx: 4px;
+}
+[data-theme="dark"] .node-entity rect {
+  stroke: #38bdf8;
+  fill: #1e293b;
+}
+
+.node-entity text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--text-main);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+/* Losango de Relacionamento */
+.node-relation {
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.node-relation:hover polygon {
+  stroke-width: 2.5px;
+  stroke: var(--accent-amber);
+  filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.25));
+}
+
+.node-relation polygon {
+  fill: var(--bg-surface);
+  stroke: var(--accent-amber);
+  stroke-width: 2px;
+}
+[data-theme="dark"] .node-relation polygon {
+  fill: #1e293b;
+  stroke: #fbbf24;
+}
+
+.node-relation text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--text-main);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+/* Elipses de Atributos */
+.node-attribute {
+  cursor: pointer;
+}
+
+.node-attribute:hover ellipse {
+  stroke-width: 2px;
+  stroke: var(--accent-emerald);
+}
+
+.node-attribute ellipse {
+  fill: var(--bg-surface);
+  stroke: var(--accent-emerald);
+  stroke-width: 1.5px;
+}
+[data-theme="dark"] .node-attribute ellipse {
+  fill: #1e293b;
+  stroke: #34d399;
+}
+
+/* Bolinha Preta do Identificador Único ⚫ */
+.node-attribute.pk ellipse {
+  fill: var(--text-main);
+  stroke: var(--text-main);
+}
+
+.node-attribute text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 10.5px;
+  fill: var(--text-main);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.node-attribute.pk text {
+  fill: var(--text-inverse);
+  font-weight: 700;
+}
+
+/* Conectores / Linhas de Ligação */
+.edge-line {
+  stroke: var(--text-muted);
+  stroke-width: 1.5px;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.edge-cardinality {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--accent-rose);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  background-color: var(--bg-surface);
+  paint-order: stroke;
+  stroke: var(--bg-surface);
+  stroke-width: 3px;
+}
+
+/* ==============================================================================
+   📊 ESTILOS DO MODO LÓGICO RELACIONAL (TABELAS DE CODD)
+   ============================================================================== */
+.relational-table {
+  cursor: pointer;
+  filter: drop-shadow(var(--shadow-md));
+  transition: transform 0.15s ease;
+}
+
+.relational-table:hover {
+  transform: translateY(-2px);
+}
+
+.table-header-bg {
+  fill: var(--senai-blue);
+  rx: 8px 8px 0 0;
+}
+[data-theme="dark"] .table-header-bg {
+  fill: #0c4a6e;
+}
+
+.table-title {
+  fill: white;
+  font-size: 12px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.table-body-bg {
+  fill: var(--bg-surface);
+  stroke: var(--border-subtle);
+  stroke-width: 1.5px;
+  rx: 0 0 8px 8px;
+}
+
+.col-text {
+  font-size: 11px;
+  fill: var(--text-main);
+  font-family: monospace;
+}
+
+.badge-pk {
+  fill: var(--accent-amber);
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.badge-fk {
+  fill: var(--accent-cyan);
+  font-size: 9px;
+  font-weight: 900;
+}
