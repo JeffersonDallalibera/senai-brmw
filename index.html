@@ -21,7 +21,7 @@
       <a href="#" class="brand-link" onclick="window.senaiApp.switchView('docs'); return false;">
         <img src="assets/senai-logo.svg" alt="SENAI Logo" class="brand-logo">
       </a>
-      <span class="brand-badge">Novo Ensino Médio • 120h</span>
+      <span class="brand-badge">SESI SENAI • 120h</span>
     </div>
 
     <!-- Abas Principais -->
@@ -33,16 +33,16 @@
         <span>🧭</span> Guia de Ações
       </button>
       <button class="tab-btn" data-view="simulator">
-        <span>🎮</span> Simulador de Cardinalidades
+        <span>🎮</span> Simulador
       </button>
       <button class="tab-btn" data-view="checklist">
-        <span>✅</span> Checklist Pré-Entrega
+        <span>✅</span> Checklist
       </button>
       <button class="tab-btn" data-view="sos">
         <span>🆘</span> SOS brModelo
       </button>
       <button class="tab-btn" data-view="quiz">
-        <span>🧠</span> Quiz de Fixação
+        <span>🧠</span> Quiz
       </button>
     </nav>
 
@@ -70,11 +70,17 @@
     <!-- VIEW 1: DOCUMENTAÇÃO INTERATIVA -->
     <section id="view-docs" class="view-section active">
       <div class="docs-layout">
+        <!-- Overlay para fechar sidebar no mobile -->
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
         <aside class="docs-sidebar" id="docsSidebar">
           <!-- Categorias e Links inseridos via JavaScript -->
         </aside>
 
         <main class="docs-content" id="docsContent">
+          <button id="mobileDocsToggle" class="mobile-docs-toggle">
+            <span>📑</span> Tópicos da Documentação (10 Artigos)
+          </button>
           <!-- Artigo da documentação carregado via JavaScript -->
         </main>
       </div>

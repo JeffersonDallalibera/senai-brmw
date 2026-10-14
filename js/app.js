@@ -127,13 +127,23 @@ class SenaiBrmwApp {
     sidebar.innerHTML = sidebarHtml;
 
     // Listeners nos links da sidebar
+    const backdrop = document.getElementById("sidebarBackdrop");
     sidebar.querySelectorAll(".doc-link").forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const docId = link.getAttribute("data-doc-id");
         this.renderDocArticle(docId);
+        sidebar.classList.remove("open");
+        if (backdrop) backdrop.classList.remove("open");
       });
     });
+
+    if (backdrop) {
+      backdrop.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        backdrop.classList.remove("open");
+      });
+    }
 
     // Renderiza artigo inicial
     this.renderDocArticle(this.currentDocId);
@@ -152,6 +162,9 @@ class SenaiBrmwApp {
 
     const content = document.getElementById("docsContent");
     content.innerHTML = `
+      <button id="mobileDocsToggle" class="mobile-docs-toggle">
+        <span>📑</span> Tópicos da Documentação (10 Artigos)
+      </button>
       <div class="doc-header">
         <div class="doc-breadcrumb">${doc.category} ➔ Artigo</div>
         <h1 class="doc-title">${doc.icon} ${doc.title}</h1>
@@ -161,6 +174,17 @@ class SenaiBrmwApp {
         ${doc.content}
       </div>
     `;
+
+    // Reassocia evento no botão mobile
+    const mobileToggle = document.getElementById("mobileDocsToggle");
+    const sidebar = document.getElementById("docsSidebar");
+    const backdrop = document.getElementById("sidebarBackdrop");
+    if (mobileToggle) {
+      mobileToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        if (backdrop) backdrop.classList.toggle("open");
+      });
+    }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
