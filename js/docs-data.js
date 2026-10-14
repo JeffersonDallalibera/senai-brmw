@@ -140,6 +140,44 @@ export const DOCS_SECTIONS = [
           <strong>Por que a Bolinha Preta é obrigatória?</strong> Se você não definir um identificador único para cada entidade, pessoas com nomes iguais (homônimos como <em>"Lucas da Silva"</em>) misturarão cadastros e compras no banco de dados!
         </div>
       </div>
+
+      <h2>Por que e quando colocar Cardinalidade no Atributo?</h2>
+      <p>Muitos alunos acham que cardinalidade <code>(0,1)</code>, <code>(1,1)</code> ou <code>(0,n)</code> só existe em relacionamentos entre retângulos. Mas colocar <strong>cardinalidade em um atributo</strong> é uma das ferramentas mais poderosas da modelagem!</p>
+
+      <div class="card-grid">
+        <div class="feature-card">
+          <div class="card-icon">1️⃣</div>
+          <div class="card-title">O Mínimo (0 ou 1): Opcional vs Obrigatório</div>
+          <div class="card-desc">
+            • <strong>Mínimo = 0:</strong> O campo é <em>opcional</em> (no banco físico aceita <code>NULL</code>). Ex: <code>complemento_endereco</code>.<br>
+            • <strong>Mínimo = 1:</strong> O campo é <em>obrigatório</em> (no banco físico vira <code>NOT NULL</code>). Ex: <code>nome</code>, <code>cpf</code>.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">2️⃣</div>
+          <div class="card-title">O Máximo (1 ou n): Monovalorado vs Multivalorado</div>
+          <div class="card-desc">
+            • <strong>Máximo = 1:</strong> O registro só pode ter <em>um valor</em>. Ex: <code>data_nascimento</code>.<br>
+            • <strong>Máximo = n:</strong> O registro aceita <em>vários valores</em>! Ex: <code>telefone</code> (residencial, celular, recado).
+          </div>
+        </div>
+      </div>
+
+      <h3>As 4 Combinações Possíveis na Prática:</h3>
+      <ul>
+        <li><code>(1,1)</code> ➔ <strong>Obrigatório e Único:</strong> É o padrão da maioria dos campos (ex: <code>cpf</code>).</li>
+        <li><code>(0,1)</code> ➔ <strong>Opcional e Único:</strong> Pode ficar em branco, mas se preencher, tem só 1 (ex: <code>apelido</code>, <code>cnh</code>).</li>
+        <li><code>(0,n)</code> ➔ <strong>Opcional e Multivalorado:</strong> Pode não ter nenhum ou ter vários (ex: <code>telefone</code>).</li>
+        <li><code>(1,n)</code> ➔ <strong>Obrigatório e Multivalorado:</strong> Tem que ter ao menos 1 e pode ter vários (ex: <code>idioma_fluente</code>).</li>
+      </ul>
+
+      <div class="alert-box alert-tip">
+        <span class="alert-icon">⚡</span>
+        <div>
+          <strong>O Efeito Mágico no Modelo Lógico (1ª Forma Normal):</strong><br>
+          Bancos relacionais proíbem guardar múltiplos telefones separados por vírgula na mesma célula. Quando você define um atributo com máximo <code>n</code> (ex: <code>telefone (0,n)</code>) e clica em <strong>Converter para Lógico</strong> no brModelo Web, o sistema <strong>cria automaticamente uma tabela separada</strong> (ex: <code>telefone_cliente</code>) com Chave Estrangeira ligada à entidade!
+        </div>
+      </div>
     `
   },
   {
