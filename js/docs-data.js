@@ -230,28 +230,68 @@ export const DOCS_SECTIONS = [
     description: "Criando o triângulo de herança, definindo subclasses e disjunção (d) ou sobreposição (o).",
     content: `
       <h2>O que é Especialização / Generalização?</h2>
-      <p>É o mecanismo similar à herança da Orientação a Objetos. Usamos quando uma entidade genérica possui tipos específicos que compartilham atributos comuns, mas têm detalhes exclusivos.</p>
-      <p><em>Exemplo clássico:</em> <code>CLIENTE</code> é genérico. Mas pode se especializar em <code>PESSOA_FISICA</code> (tem CPF) ou <code>PESSOA_JURIDICA</code> (tem CNPJ).</p>
+      <p>É o mecanismo equivalente à <strong>Herança</strong> da Orientação a Objetos. Usamos quando uma entidade genérica (Mãe / Superclasse) possui tipos específicos (Filhas / Subclasses) que compartilham atributos comuns, mas possuem detalhes exclusivos.</p>
+      <p><em>Exemplo clássico:</em> <code>CLIENTE</code> é genérico (tem <code>id_cliente</code>, <code>nome</code>, <code>data_cadastro</code>). Mas pode se especializar em <code>PESSOA_FISICA</code> (tem <code>cpf</code>) ou <code>PESSOA_JURIDICA</code> (tem <code>cnpj</code> e <code>inscricao_estadual</code>).</p>
 
-      <h2>Como Fazer no brModelo Web (Passo a Passo):</h2>
-      <ol>
-        <li>Desenhe a entidade genérica pai (ex: <code>CLIENTE</code>).</li>
-        <li>Desenhe as duas entidades filhas abaixo dela (ex: <code>PESSOA_FISICA</code> e <code>PESSOA_JURIDICA</code>).</li>
-        <li>Na barra de ferramentas, clique no ícone de <strong>Triângulo / Especialização</strong> e coloque entre o pai e os filhos.</li>
-        <li>Conecte o pai à ponta superior do triângulo e os filhos às pontas inferiores.</li>
-        <li>No painel direito do triângulo, escolha as duas propriedades de ouro:
-          <ul>
-            <li><strong>Disjunção (d) vs Sobreposição (o):</strong>
-              <br>• <strong>(d) Disjunta:</strong> Um cliente é OU física OU jurídica, nunca os dois ao mesmo tempo.
-              <br>• <strong>(o) Sobreposta:</strong> Um elemento pode ser ambos (ex: um <code>FUNCIONARIO</code> que também é <code>ALUNO</code>).
-            </li>
-            <li><strong>Total (t) vs Parcial (p):</strong>
-              <br>• <strong>Total:</strong> Todo cliente OBRIGATORIAMENTE tem que ser física ou jurídica.
-              <br>• <strong>Parcial:</strong> Podem existir clientes que não se enquadram em nenhuma das duas categorias.
-            </li>
-          </ul>
-        </li>
-      </ol>
+      <h2>O Dropdown "Especializar" no brModelo Web: O que significa cada letra?</h2>
+      <p>No painel direito de propriedades do brModelo Web, a caixa de seleção apresenta 4 combinações de duas letras:</p>
+
+      <div class="card-grid">
+        <div class="feature-card">
+          <div class="card-icon">1️⃣</div>
+          <div class="card-title">1ª Letra: Totalidade (t) vs Parcialidade (p)</div>
+          <div class="card-desc">
+            • <strong>(t) Total:</strong> Todo e qualquer elemento cadastrado na entidade mãe <em>DEVE OBRIGATORIAMENTE</em> pertencer a alguma das filhas.<br>
+            • <strong>(p) Parcial:</strong> Podem existir elementos na entidade mãe que <em>NÃO PERTENCEM</em> a nenhuma das filhas especializadas.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">2️⃣</div>
+          <div class="card-title">2ª Letra: Disjunta (d) vs Compartilhada (c)</div>
+          <div class="card-desc">
+            • <strong>(d) Disjunta / Exclusiva:</strong> Um elemento pode pertencer a <em>NO MÁXIMO UMA</em> subclasse (ou é uma ou é outra, nunca as duas ao mesmo tempo).<br>
+            • <strong>(c) Compartilhada / Sobreposta:</strong> Um mesmo elemento <em>PODE PERTENCER A MAIS DE UMA</em> subclasse simultaneamente.
+          </div>
+        </div>
+      </div>
+
+      <h3>As 4 Opções do brModelo Web Explicadas com Cenários Reais:</h3>
+      
+      <div class="alert-box alert-tip">
+        <span class="alert-icon">💎</span>
+        <div>
+          <strong>1. (t, d) ➔ Total e Disjunta (A Mais Utilizada no Mercado!):</strong><br>
+          <em>Exemplo:</em> <code>CLIENTE</code> ➔ <code>PESSOA_FISICA</code> ou <code>PESSOA_JURIDICA</code>.<br>
+          Todo cliente obrigatoriamente tem que ser física ou jurídica (Total), e ninguém pode ser pessoa física e jurídica ao mesmo tempo na mesma conta (Disjunta).
+        </div>
+      </div>
+
+      <div class="alert-box alert-info">
+        <span class="alert-icon">🔄</span>
+        <div>
+          <strong>2. (t, c) ➔ Total e Compartilhada (Sobreposta):</strong><br>
+          <em>Exemplo:</em> <code>MEMBRO_ACADEMICO</code> ➔ <code>ALUNO</code> e <code>PROFESSOR</code>.<br>
+          Todo membro cadastrado precisa ter uma função na escola (Total), mas um professor pode também estar matriculado como aluno em um curso do SENAI (Compartilhada/Sobreposta).
+        </div>
+      </div>
+
+      <div class="alert-box alert-warn">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>3. (p, d) ➔ Parcial e Disjunta:</strong><br>
+          <em>Exemplo:</em> <code>FUNCIONARIO</code> ➔ <code>ENGENHEIRO</code> e <code>SECRETARIO</code>.<br>
+          Podem existir funcionários comuns que não são nem engenheiros nem secretários (Parcial), mas se for engenheiro, não pode ser secretário (Disjunta).
+        </div>
+      </div>
+
+      <div class="alert-box alert-tip">
+        <span class="alert-icon">📦</span>
+        <div>
+          <strong>4. (p, c) ➔ Parcial e Compartilhada:</strong><br>
+          <em>Exemplo:</em> <code>USUARIO</code> ➔ <code>STREAMER</code> e <code>MODERADOR</code>.<br>
+          O usuário pode ser um espectador comum (Parcial), ou pode ser streamer, ou moderador, ou ambos ao mesmo tempo (Compartilhada).
+        </div>
+      </div>
     `
   },
   {
