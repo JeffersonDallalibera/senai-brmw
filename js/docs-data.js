@@ -44,6 +44,75 @@ export const DOCS_SECTIONS = [
           <div class="card-desc">Abre ao clicar em qualquer elemento. Permite mudar nome, marcar se o atributo é <strong>Identificador (Chave ⚫)</strong>, definir cardinalidades e tipos.</div>
         </div>
       </div>
+
+      <h2>Os 6 Botões da Barra Lateral de Ferramentas (Toolbar):</h2>
+      <p>Ao abrir o Canvas do brModelo Web, você encontra a paleta vertical com os 6 componentes essenciais da modelagem:</p>
+
+      <div class="card-grid">
+        <div class="feature-card">
+          <div class="card-icon">📦</div>
+          <div class="card-title">1. Entity (Entidade)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Retângulo que representa uma "coisa" do mundo real sobre a qual guardamos dados.<br>
+            <strong>Regra:</strong> Sempre no SINGULAR e MAIÚSCULAS.<br>
+            <strong>Exemplos:</strong> <code>CLIENTE</code>, <code>PRODUTO</code>, <code>PEDIDO</code>.<br>
+            <strong>No Lógico:</strong> Vira uma <strong>TABELA</strong> relacional.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🔶</div>
+          <div class="card-title">2. Rel (Relacionamento)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Losango que conecta duas entidades que conversam entre si.<br>
+            <strong>Regra:</strong> Deve conter um VERBO DE AÇÃO em maiúsculas.<br>
+            <strong>Exemplos:</strong> <code>REALIZA</code>, <code>FORNECE</code>, <code>PERTENCE</code>.<br>
+            <strong>No Lógico:</strong> Vira <strong>Chave Estrangeira [FK]</strong> (em 1:N) ou <strong>Tabela Associativa</strong> (em N:N).
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🔲</div>
+          <div class="card-title">3. Auto (Entidade Associativa / Auto-Relacionamento)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Losango envolvido por um retângulo.<br>
+            <strong>Quando usar:</strong> Usado quando um relacionamento N:N precisa guardar atributos próprios (ex: quantidade comprada e desconto na relação entre Pedido e Produto). Também usado para representar uma entidade relacionando-se consigo mesma (ex: Funcionário gerencia Funcionário).<br>
+            <strong>No Lógico:</strong> Vira uma <strong>TABELA INTERMEDIÁRIA</strong> com as duas FKs.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">⚪</div>
+          <div class="card-title">4. Atributo (Atributo Comum)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Círculo branco / elipse vazada.<br>
+            <strong>O que guarda:</strong> Uma característica ou dado descritivo da entidade.<br>
+            <strong>Exemplos:</strong> <code>nome</code>, <code>preco_venda</code>, <code>data_cadastro</code>.<br>
+            <strong>No Lógico:</strong> Vira uma <strong>COLUNA</strong> comum na tabela.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">⚫</div>
+          <div class="card-title">5. Chave (Identificador Único)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Círculo preenchido de preto sólido (a Bolinha Preta ⚫).<br>
+            <strong>Função:</strong> A "impressão digital" do registro. O valor que nunca se repete.<br>
+            <strong>Exemplos:</strong> <code>id_cliente</code>, <code>cpf</code>, <code>cnpj</code>, <code>codigo_sku</code>.<br>
+            <strong>No Lógico:</strong> Vira a <strong>PRIMARY KEY [PK]</strong> da tabela!
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">📝</div>
+          <div class="card-title">6. Nota (Comentário / Post-it)</div>
+          <div class="card-desc">
+            <strong>O que é:</strong> Retângulo cinza claro para anotações livres.<br>
+            <strong>Função:</strong> Deixar recados de regras de negócio, premissas de projeto ou lembretes para o professor e equipe.<br>
+            <strong>No Lógico:</strong> NÃO afeta o banco de dados nem gera comandos SQL (é apenas documentação visual).
+          </div>
+        </div>
+      </div>
     `
   },
   {
