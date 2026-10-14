@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SENAI BRMW • Guia Interativo &amp; Modelador de Banco de Dados</title>
-  <meta name="description" content="Documentação interativa, simulador de cardinalidades e gerador de modelos conceituais para importação no brModelo Web e Draw.io. Desenvolvido para estudantes do SESI SENAI.">
+  <title>SENAI BRMW • Guia Interativo do brModelo Web & Modelagem de Dados</title>
+  <meta name="description" content="Plataforma de aprendizado do brModelo Web e Modelagem Conceitual/Lógica de Banco de Dados para estudantes do SESI SENAI.">
   <link rel="icon" type="image/svg+xml" href="assets/senai-logo.svg">
   
   <!-- Estilos da Aplicação -->
@@ -29,11 +29,17 @@
       <button class="tab-btn active" data-view="docs">
         <span>📖</span> Documentação
       </button>
-      <button class="tab-btn" data-view="generator">
-        <span>⚡</span> Gerador por Layout / IA
+      <button class="tab-btn" data-view="actions">
+        <span>🧭</span> Guia de Ações
       </button>
       <button class="tab-btn" data-view="simulator">
         <span>🎮</span> Simulador de Cardinalidades
+      </button>
+      <button class="tab-btn" data-view="checklist">
+        <span>✅</span> Checklist Pré-Entrega
+      </button>
+      <button class="tab-btn" data-view="sos">
+        <span>🆘</span> SOS brModelo
       </button>
       <button class="tab-btn" data-view="quiz">
         <span>🧠</span> Quiz de Fixação
@@ -74,101 +80,28 @@
       </div>
     </section>
 
-    <!-- VIEW 2: GERADOR POR LAYOUT / IA & CANVAS INTERATIVO -->
-    <section id="view-generator" class="view-section">
-      <div class="generator-layout">
-        
-        <!-- Painel Lateral de Controle -->
-        <aside class="generator-sidebar">
-          <div class="panel-header">
-            <div class="panel-title">
-              <span>⚡</span> Modelador Inteligente
-            </div>
-            <div class="panel-subtitle">Gere diagramas prontos para importação</div>
-          </div>
+    <!-- VIEW 2: GUIA DE AÇÕES PASSO A PASSO ("COMO FAÇO PARA...?") -->
+    <section id="view-actions" class="view-section">
+      <div class="actions-layout">
+        <div class="actions-header">
+          <span class="brand-badge">Passo a Passo Visual</span>
+          <h1 style="margin-top: 0.5rem;">O que você quer fazer no brModelo Web? 🧭</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
+            Selecione uma ação abaixo para ver os cliques exatos, atalhos, dicas e como não errar.
+          </p>
+        </div>
 
-          <!-- Abas de Criação: Presets vs IA -->
-          <div class="generator-tabs">
-            <button class="gen-tab-btn active" data-tab="presets">📦 Layouts Prontos</button>
-            <button class="gen-tab-btn" data-tab="ai">✨ Criar com IA</button>
-          </div>
+        <div class="actions-filter-bar" id="actionsFilterBar">
+          <button class="filter-btn active" data-filter="all">Todos os Processos</button>
+          <button class="filter-btn" data-filter="1. Modelagem Conceitual">1. Modelagem Conceitual</button>
+          <button class="filter-btn" data-filter="2. Modelo Lógico">2. Modelo Lógico</button>
+          <button class="filter-btn" data-filter="3. Gestão & Entrega">3. Gestão & Entrega</button>
+          <button class="filter-btn" data-filter="4. Banco Físico & Código">4. Banco Físico & Código</button>
+        </div>
 
-          <div class="panel-body">
-            <!-- Sub-aba 1: Layouts Pré-Definidos do SENAI -->
-            <div id="tab-presets">
-              <div class="preset-list" id="presetList">
-                <!-- Inserido dinamicamente via generator.js -->
-              </div>
-            </div>
-
-            <!-- Sub-aba 2: Gerador de Prompt com IA -->
-            <div id="tab-ai" style="display: none;">
-              <div class="ai-prompt-box">
-                <label style="font-size: 0.85rem; font-weight: 600;">Descreva o sistema em português:</label>
-                <textarea id="aiPromptInput" class="prompt-textarea" placeholder="Ex: Sistema para uma oficina mecânica com carros, clientes, peças e ordens de serviço..."></textarea>
-                <button id="btnAiGenerate" class="btn-generate">
-                  <span>Gerar Modelo Conceitual</span> ✨
-                </button>
-              </div>
-            </div>
-
-            <!-- Auditor Automático de Regras de Peter Chen -->
-            <div style="margin-top: 1rem; padding: 0.85rem; background: var(--bg-surface-elevated); border-radius: 8px; border: 1px solid var(--border-subtle);">
-              <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--text-muted);">
-                Auditor de Peter Chen (Feedback Automático):
-              </div>
-              <div id="auditorBox"></div>
-            </div>
-          </div>
-
-          <!-- Painel de Exportação para Outras Ferramentas -->
-          <div class="export-panel">
-            <div class="export-title">📥 Exportar para Ferramentas:</div>
-            <div class="export-buttons-grid">
-              <button id="btnExportBrmw" class="btn-export" title="Exporta JSON para importar no app.brmodeloweb.com">
-                <span>🌐</span> brModelo Web
-              </button>
-              <button id="btnExportDrawio" class="btn-export" title="Exporta XML para abrir no Draw.io">
-                <span>📐</span> Draw.io (.drawio)
-              </button>
-              <button id="btnExportMermaid" class="btn-export" title="Exporta código Markdown Mermaid">
-                <span>🧜</span> Mermaid ERD
-              </button>
-              <button id="btnExportSql" class="btn-export" title="Exporta script DDL para MySQL">
-                <span>🐬</span> MySQL DDL
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        <!-- Palco do Canvas Interativo -->
-        <main class="generator-stage">
-          <div class="canvas-toolbar">
-            <div class="model-mode-toggle">
-              <button class="mode-btn active" data-mode="conceptual">Conceitual (Peter Chen)</button>
-              <button class="mode-btn" data-mode="logical">Lógico (Tabelas de Codd)</button>
-            </div>
-
-            <div class="canvas-zoom-controls">
-              <button id="btnZoomOut" class="icon-btn" title="Diminuir Zoom">➖</button>
-              <button id="btnZoomReset" class="icon-btn" title="Centralizar e Redefinir Zoom">🔄</button>
-              <button id="btnZoomIn" class="icon-btn" title="Aumentar Zoom">➕</button>
-            </div>
-          </div>
-
-          <div class="canvas-container" id="canvasContainer">
-            <svg id="diagramSvg" class="diagram-svg"></svg>
-          </div>
-
-          <!-- Drawer de Inspeção do Elemento Clicado -->
-          <aside class="inspector-drawer" id="inspectorDrawer">
-            <div class="drawer-header">
-              <div class="drawer-title">Inspetor de Objeto</div>
-              <button id="drawerCloseBtn" class="icon-btn" style="padding: 0.2rem 0.4rem;">✕</button>
-            </div>
-            <div id="drawerContent"></div>
-          </aside>
-        </main>
+        <div class="actions-grid" id="actionsGrid">
+          <!-- Cards de ações inseridos dinamicamente via JavaScript -->
+        </div>
       </div>
     </section>
 
@@ -178,7 +111,7 @@
         <div class="sim-hero">
           <span class="brand-badge">Didática Descomplicada</span>
           <h1 style="margin-top: 0.5rem;">O Fim do Medo das Cardinalidades 🎯</h1>
-          <p style="color: var(--text-muted); font-size: 1.1rem;">
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
             Aprenda a deduzir <code>(0,1)</code>, <code>(1,1)</code>, <code>(0,n)</code> e <code>(1,n)</code> respondendo às duas perguntas da regra de negócio.
           </p>
         </div>
@@ -203,19 +136,78 @@
           <div class="sim-result-box">
             <div class="sim-result-title">Cardinalidade Resultante:</div>
             <div class="sim-cardinality-display" id="simResultDisplay">(0,n) --- [REALIZA] --- (1,1)</div>
-            <p id="simJustification" style="font-size: 0.92rem; color: var(--text-main); font-weight: 500;"></p>
+            <p id="simJustification" style="font-size: 0.95rem; color: var(--text-main); font-weight: 500;"></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 4: QUIZ DE FIXAÇÃO -->
+    <!-- VIEW 4: CHECKLIST INTERATIVO DE PRÉ-ENTREGA DO ALUNO -->
+    <section id="view-checklist" class="view-section">
+      <div class="checklist-layout">
+        <div class="checklist-header">
+          <span class="brand-badge">Auditor do Estudante</span>
+          <h1 style="margin-top: 0.5rem;">Checklist Pré-Entrega Nota 10 🏆</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
+            Marque cada item antes de enviar seu trabalho para o professor e garanta nota máxima.
+          </p>
+        </div>
+
+        <!-- Card de Pontuação Dinâmica -->
+        <div class="checklist-score-card">
+          <div class="checklist-score-info">
+            <h2 id="checklistScoreTitle">Progresso da Auditoria</h2>
+            <p id="checklistScoreDesc">Marque os requisitos atendidos no seu modelo.</p>
+          </div>
+          <div class="checklist-gauge">
+            <div class="checklist-gauge-circle" id="checklistPercent">0%</div>
+            <div>
+              <span class="badge-grade" id="checklistGradeBadge">Iniciando</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade de Itens Checáveis -->
+        <div class="checklist-items-grid" id="checklistItemsGrid">
+          <!-- Inserido dinamicamente via checklist.js -->
+        </div>
+
+        <!-- Barra de Ações -->
+        <div class="checklist-actions-bar">
+          <button id="btnResetChecklist" class="filter-btn" style="color: var(--accent-rose);">
+            🔄 Reiniciar Checklist
+          </button>
+          <button id="btnCopyChecklistReport" class="btn-senai">
+            📋 Copiar Relatório de Validação
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: SOS & SOLUÇÃO DE PROBLEMAS -->
+    <section id="view-sos" class="view-section">
+      <div class="sos-layout">
+        <div class="sos-header">
+          <span class="brand-badge" style="background: var(--accent-rose-light); color: var(--accent-rose);">Central de Emergências</span>
+          <h1 style="margin-top: 0.5rem;">SOS brModelo Web: Como Resolver os 8 Erros Mais Comuns 🚨</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
+            O modelo sumiu? Não gerou a Chave Estrangeira? As linhas estão bugadas? Veja como consertar em segundos.
+          </p>
+        </div>
+
+        <div class="sos-grid" id="sosGrid">
+          <!-- Inserido dinamicamente via sos-guide.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: QUIZ DE FIXAÇÃO -->
     <section id="view-quiz" class="view-section">
       <div class="quiz-layout">
         <div class="quiz-container" id="quizContainer">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
             <span class="brand-badge">Avaliação Formativa</span>
-            <span id="quizCounter" style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Questão 1 de 10</span>
+            <span id="quizCounter" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Questão 1 de 10</span>
           </div>
 
           <div class="quiz-progress-bar">
@@ -240,19 +232,45 @@
   </main>
 
   <!-- ==============================================================================
-       MODAL DE CÓDIGO (MERMAID / SQL)
+       MODAL DE DETALHES DO PASSO A PASSO DA AÇÃO
+       ============================================================================== -->
+  <div class="modal-overlay" id="actionModal">
+    <div class="modal-card action-modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span id="actionModalIcon" style="font-size: 1.6rem;">📦</span>
+          <div>
+            <h3 id="actionModalTitle" style="font-size: 1.15rem;">Título da Ação</h3>
+            <span id="actionModalCategory" class="action-card-category">Categoria</span>
+          </div>
+        </div>
+        <button id="actionModalCloseBtn" class="icon-btn" style="padding: 0.2rem 0.5rem;">✕</button>
+      </div>
+      <div class="modal-body" id="actionModalBody">
+        <!-- Preenchido via app.js -->
+      </div>
+      <div class="modal-footer">
+        <a href="https://app.brmodeloweb.com" target="_blank" rel="noopener noreferrer" class="btn-senai">
+          Praticar no brModelo Web ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       MODAL GENÉRICO DE CÓDIGO / COMPROVANTE
        ============================================================================== -->
   <div class="modal-overlay" id="codeModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modalTitle" style="font-size: 1.15rem;">Exportar Código</h3>
+        <h3 id="modalTitle" style="font-size: 1.15rem;">Comprovante de Auditoria</h3>
         <button id="modalCloseBtn" class="icon-btn" style="padding: 0.2rem 0.5rem;">✕</button>
       </div>
       <div class="modal-body">
         <pre><code id="modalCodeBlock"></code></pre>
       </div>
       <div class="modal-footer">
-        <button id="modalCopyBtn" class="btn-senai">Copiar Código 📋</button>
+        <button id="modalCopyBtn" class="btn-senai">Copiar Texto 📋</button>
       </div>
     </div>
   </div>

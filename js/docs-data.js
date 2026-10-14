@@ -1,254 +1,365 @@
 /* ==============================================================================
-   📚 BASE DE CONHECIMENTO & DOCUMENTAÇÃO INTERATIVA • SENAI BRMW
-   Baseada na documentação oficial do brmodelo web e nos padrões curriculares
+   📚 BASE DE CONHECIMENTO & GUIA PASSO A PASSO • brModelo Web & SENAI
+   Documentação exaustiva, intuitiva e didática para estudantes de 14 a 17 anos
    ============================================================================== */
 
 export const DOCS_SECTIONS = [
   {
-    id: "introducao",
-    category: "1. Primeiros Passos",
-    icon: "🚀",
-    title: "Bem-vindo ao brModelo Web & Engenharia de Dados",
-    description: "Visão geral da ferramenta web de modelagem e seus objetivos pedagógicos.",
+    id: "visao-geral",
+    category: "1. Conhecendo o brModelo Web",
+    icon: "🌐",
+    title: "O que é o brModelo Web e Primeiros Passos",
+    description: "Visão geral da interface, vantagens do formato web e como acessar.",
     content: `
       <h2>O que é o brModelo Web?</h2>
-      <p>O <strong>brModelo Web</strong> (brmodeloweb.com) é a evolução moderna baseada em nuvem do clássico software acadêmico brasileiro brModelo. Ele permite criar, editar, compartilhar e exportar diagramas de banco de dados diretamente no navegador, eliminando problemas de instalação local do Java.</p>
-      
-      <div class="alert-box alert-info">
-        <span class="alert-icon">💡</span>
-        <div>
-          <strong>Propósito no SENAI:</strong> Esta plataforma interactiva serve como companheira de estudos para transformar regras de negócios em modelos conceituais (Peter Chen) e lógicos (Ted Codd) de alta qualidade técnica.
-        </div>
-      </div>
-
-      <h2>Vantagens da Versão Web</h2>
-      <div class="card-grid">
-        <div class="feature-card">
-          <div class="card-icon">🌐</div>
-          <div class="card-title">100% no Navegador</div>
-          <div class="card-desc">Funciona em qualquer computador (Windows, Linux, Chromebook), sem baixar arquivos .jar ou configurar variáveis de ambiente.</div>
-        </div>
-        <div class="feature-card">
-          <div class="card-icon">🔗</div>
-          <div class="card-title">Compartilhamento por Link</div>
-          <div class="card-desc">Permite gerar URLs públicas para o professor ou colegas visualizarem o modelo instantaneamente.</div>
-        </div>
-        <div class="feature-card">
-          <div class="card-icon">⚡</div>
-          <div class="card-title">Conversão Automática</div>
-          <div class="card-desc">Transforma o modelo conceitual de Peter Chen diretamente em modelo lógico relacional com chaves estrangeiras.</div>
-        </div>
-      </div>
-    `
-  },
-  {
-    id: "operacoes-basicas",
-    category: "1. Primeiros Passos",
-    icon: "📂",
-    title: "Gerenciamento de Modelos no brModelo Web",
-    description: "Como criar, duplicar, renomear, excluir, importar e exportar modelos.",
-    content: `
-      <h2>Operações Essenciais</h2>
-      <p>A barra lateral e o menu principal do brmodelo web organizam os seus projetos em três etapas fundamentais:</p>
-
-      <h3>1. Criando um Novo Modelo</h3>
-      <p>Ao clicar no botão <strong>"+ Novo Modelo"</strong>, você escolhe entre:</p>
-      <ul>
-        <li><strong>Modelo Conceitual:</strong> Diagrama Entidade-Relacionamento (DER) usando a notação de Peter Chen (Retângulos, Losangos e Elipses).</li>
-        <li><strong>Modelo Lógico:</strong> Diagrama Relacional de Tabelas com Chaves Primárias (PK) e Estrangeiras (FK).</li>
-      </ul>
-
-      <h3>2. Importação e Exportação</h3>
-      <p>O brmodelo web permite salvar e carregar modelos em formato JSON estruturado:</p>
-      <div class="code-container">
-        <div class="code-header">
-          <span>formato_modelo.json</span>
-          <button class="code-copy-btn" onclick="navigator.clipboard.writeText('{\\n  \"name\": \"estoque_db\",\\n  \"type\": \"conceptual\"\\n}')">Copiar</button>
-        </div>
-        <pre><code>{
-  "name": "Controle_Estoque_SENAI",
-  "version": "2.0",
-  "type": "conceptual",
-  "elements": [...]
-}</code></pre>
-      </div>
+      <p>O <strong>brModelo Web</strong> (<a href="https://app.brmodeloweb.com" target="_blank">app.brmodeloweb.com</a>) é a versão online e moderna da ferramenta de modelagem mais utilizada no ensino técnico brasileiro. Ele roda <strong>100% no navegador</strong>, sem precisar instalar Java nem baixar arquivos <code>.jar</code>.</p>
 
       <div class="alert-box alert-tip">
-        <span class="alert-icon">⚡</span>
+        <span class="alert-icon">💡</span>
         <div>
-          <strong>Super Recurso desta Documentação:</strong> Na aba <em>"Gerador por Layout / IA"</em> deste portal, você pode gerar modelos conceituais completos e exportar o arquivo pronto para importação no brmodelo web com 1 clique!
+          <strong>Link Oficial de Acesso:</strong> Você pode acessar diretamente em <a href="https://app.brmodeloweb.com" target="_blank">app.brmodeloweb.com</a>. Funciona no Chrome, Edge, Firefox, no computador do SENAI e no seu celular ou notebook em casa.
         </div>
       </div>
-    `
-  },
-  {
-    id: "modelo-conceitual",
-    category: "2. Modelo Conceitual (Peter Chen)",
-    icon: "📦",
-    title: "Entidades: Os Substantivos do Sistema",
-    description: "Definição, boas práticas de nomenclatura e os 3 tipos de entidades.",
-    content: `
-      <h2>O que é uma Entidade?</h2>
-      <p>Uma <strong>Entidade</strong> representa um objeto, pessoa, evento ou conceito do mundo real sobre o qual a empresa necessita armazenar dados. No modelo de Peter Chen (1976), ela é representada graficamente por um <strong>RETÂNGULO</strong>.</p>
 
-      <h3>Regras de Ouro de Nomenclatura:</h3>
-      <ul>
-        <li><strong>Sempre no SINGULAR:</strong> Escreva <code>PRODUTO</code>, <code>CLIENTE</code>, <code>FORNECEDOR</code> (nunca <em>"Produtos"</em> ou <em>"Clientes"</em>). A entidade representa o conceito abstrato da coisa, não a lista de itens.</li>
-        <li><strong>Sempre em MAIÚSCULAS:</strong> Facilita a leitura e diferencia termos de negócio de colunas físicas.</li>
-        <li><strong>Substantivos Concretos:</strong> Evite nomes de ações como "Cadastrar" ou "Vender". Quem vende é o relacionamento!</li>
-      </ul>
-
-      <h2>Tipos de Entidades no brModelo Web:</h2>
+      <h2>A Interface do brModelo Web em 4 Áreas:</h2>
       <div class="card-grid">
         <div class="feature-card">
-          <div class="card-title">1. Entidade Regular (Forte)</div>
-          <div class="card-desc">Possui existência própria e identificador único independente (ex: <code>CLIENTE</code>, <code>PRODUTO</code>). Representada por retângulo simples.</div>
+          <div class="card-icon">1️⃣</div>
+          <div class="card-title">Barra Superior (Menu)</div>
+          <div class="card-desc">Contém o nome do modelo, botões de Salvar, Desfazer (Ctrl+Z), Refazer (Ctrl+Y), Exportar Imagem e o botão mágico de <strong>Conversão para Lógico</strong>.</div>
         </div>
         <div class="feature-card">
-          <div class="card-title">2. Entidade Fraca</div>
-          <div class="card-desc">Sua existência depende de outra entidade proprietária (ex: <code>DEPENDENTE</code> depende de <code>FUNCIONARIO</code>). Representada por retângulo duplo.</div>
+          <div class="card-icon">2️⃣</div>
+          <div class="card-title">Barra Lateral de Ferramentas</div>
+          <div class="card-desc">Onde ficam os botões para arrastar ou clicar: <strong>Entidade</strong> (Retângulo), <strong>Atributo</strong> (Círculo), <strong>Relacionamento</strong> (Losango), <strong>Especialização</strong> e <strong>Conector</strong>.</div>
         </div>
         <div class="feature-card">
-          <div class="card-title">3. Entidade Associativa</div>
-          <div class="card-desc">Nasce de um relacionamento muitos-para-muitos (N:N) que possui atributos próprios (ex: <code>ITEM_PEDIDO</code> que guarda quantidade e desconto).</div>
+          <div class="card-icon">3️⃣</div>
+          <div class="card-title">Canvas (Área de Desenho)</div>
+          <div class="card-desc">A grade quadriculada infinita onde você desenha, posiciona e conecta os elementos do seu banco de dados.</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">4️⃣</div>
+          <div class="card-title">Painel de Propriedades (Direita)</div>
+          <div class="card-desc">Abre ao clicar em qualquer elemento. Permite mudar nome, marcar se o atributo é <strong>Identificador (Chave ⚫)</strong>, definir cardinalidades e tipos.</div>
         </div>
       </div>
     `
   },
   {
-    id: "atributos-e-chaves",
-    category: "2. Modelo Conceitual (Peter Chen)",
-    icon: "🏷️",
-    title: "Atributos & O Sagrado Identificador Único ⚫",
-    description: "Como mapear características, o papel dos identificadores e tipos de atributos.",
+    id: "gerenciar-modelos",
+    category: "1. Conhecendo o brModelo Web",
+    icon: "📂",
+    title: "Como Criar, Salvar e Compartilhar Modelos",
+    description: "Passo a passo para iniciar um projeto, salvar na nuvem e exportar para entrega.",
     content: `
-      <h2>O que são Atributos?</h2>
-      <p>Atributos são as características, propriedades ou dados elementares que descrevem uma entidade. Graficamente, são representados por <strong>CÍRCULOS ou ELIPSES</strong> conectados ao retângulo da entidade por linhas simples.</p>
+      <h2>1. Como Criar um Novo Modelo (Passo a Passo)</h2>
+      <ol>
+        <li>Acesse <a href="https://app.brmodeloweb.com" target="_blank">app.brmodeloweb.com</a>.</li>
+        <li>No painel inicial, clique no botão azul <strong>"+ Novo Modelo"</strong>.</li>
+        <li>Escolha a opção <strong>"Modelo Conceitual"</strong> (para começar com Peter Chen) ou <strong>"Modelo Lógico"</strong> (tabelas relacionais).</li>
+        <li>Dê um nome significativo ao seu projeto (ex: <code>Controle_Estoque_SENAI</code> ou <code>Auto_Pecas_Loja</code>).</li>
+      </ol>
 
-      <h2>O Identificador Único (Bolinha Preta ⚫)</h2>
-      <p>O <strong>Identificador Único</strong> (ou Chave Primária Conceitual) é o atributo sagrado que <strong>NUNCA se repete</strong> e distingue um registro específico de todos os outros no universo da empresa.</p>
-      
+      <h2>2. Como Salvar o Seu Trabalho</h2>
+      <p>O brModelo Web salva automaticamente no armazenamento local do seu navegador, mas para <strong>garantir que você não perca seu trabalho ao fechar o computador do laboratório</strong>:</p>
+      <ul>
+        <li><strong>Criar Conta Gratuita:</strong> Faça login com seu Google ou e-mail para que seus modelos fiquem salvos na sua nuvem pessoal.</li>
+        <li><strong>Exportar Arquivo (.json):</strong> No menu superior, clique em <strong>Arquivo ➔ Exportar Modelo</strong>. Guarde esse arquivo no seu Google Drive ou pen-drive!</li>
+      </ul>
+
+      <h2>3. Como Exportar a Imagem para o Relatório do SENAI</h2>
+      <ol>
+        <li>No menu superior, clique no botão <strong>"Exportar Imagem"</strong> (ícone de câmera ou foto).</li>
+        <li>Escolha o formato <strong>PNG</strong> (com fundo transparente ou branco).</li>
+        <li>A imagem com o seu diagrama em alta resolução será baixada na pasta Downloads, pronta para você colar no Word, Google Docs ou entregar na Situação de Aprendizagem!</li>
+      </ol>
+    `
+  },
+  {
+    id: "passo-entidades",
+    category: "2. Passo a Passo no Canvas Conceitual",
+    icon: "📦",
+    title: "Como Adicionar e Configurar Entidades",
+    description: "Criando retângulos, renomeando e definindo tipos de entidades no brModelo Web.",
+    content: `
+      <h2>Como Inserir uma Entidade no brModelo Web</h2>
+      <ol>
+        <li>Na barra lateral esquerda de ferramentas, localize o ícone de <strong>Retângulo</strong> (Entidade).</li>
+        <li>Clique sobre o ícone e em seguida clique no local desejado do Canvas (ou arraste para o centro).</li>
+        <li>Dê um duplo clique sobre o texto da entidade ou use o painel da direita para digitar o nome.</li>
+      </ol>
+
       <div class="alert-box alert-warn">
         <span class="alert-icon">⚠️</span>
         <div>
-          <strong>O Perigo dos Homônimos:</strong> Nunca use <code>nome_cliente</code> como identificador único! Se dois clientes chamados <em>"Lucas da Silva"</em> comprarem na loja, o sistema misturaria suas compras e dívidas. Use <code>cpf</code> ou <code>id_cliente</code> ⚫!
+          <strong>Regra Inviolável de Nomenclatura no SENAI:</strong><br>
+          • <strong>SEMPRE no SINGULAR:</strong> Digite <code>PRODUTO</code> (nunca <em>"Produtos"</em>).<br>
+          • <strong>SEMPRE em MAIÚSCULAS:</strong> Digite <code>CLIENTE</code>, <code>FORNECEDOR</code>, <code>VEICULO</code>.<br>
+          • <strong>Substantivos Concretos:</strong> Uma entidade é uma "coisa" que existe no mundo real, nunca uma ação.
         </div>
       </div>
 
-      <h3>Classificação dos Atributos:</h3>
+      <h2>Tipos de Entidades Disponíveis no Painel Direito:</h2>
       <ul>
-        <li><strong>Identificador (⚫ Bolinha preenchida):</strong> Valor exclusivo por registro (ex: <code>id_produto</code>, <code>cnpj</code>, <code>codigo_barra</code>).</li>
-        <li><strong>Simples / Descritivo (⚪ Bolinha clara):</strong> Armazena um único dado informativo (ex: <code>preco</code>, <code>descricao</code>).</li>
-        <li><strong>Composto:</strong> Atributo que se subdivide em partes menores (ex: <code>Endereco</code> ➔ <code>Rua</code>, <code>Numero</code>, <code>Bairro</code>, <code>CEP</code>).</li>
-        <li><strong>Multivalorado (Círculo Duplo 🔘):</strong> Pode conter múltiplos valores para o mesmo registro (ex: <code>telefones</code> de um fornecedor).</li>
+        <li><strong>Entidade Comum / Regular (Retângulo Simples):</strong> A entidade padrão com ID próprio (ex: <code>CLIENTE</code>, <code>PRODUTO</code>).</li>
+        <li><strong>Entidade Fraca (Retângulo com borda dupla):</strong> Entidade cuja existência depende de outra (ex: <code>DEPENDENTE</code> só existe se existir <code>FUNCIONARIO</code>).</li>
+        <li><strong>Entidade Associativa:</strong> Usada quando um relacionamento N:N precisa guardar atributos próprios (ex: <code>ITEM_PEDIDO</code> guardando quantidade e desconto).</li>
       </ul>
     `
   },
   {
-    id: "relacionamentos-cardinalidades",
-    category: "2. Modelo Conceitual (Peter Chen)",
+    id: "passo-atributos",
+    category: "2. Passo a Passo no Canvas Conceitual",
+    icon: "🏷️",
+    title: "Como Adicionar Atributos e Marcar a Bolinha Preta ⚫",
+    description: "Conectando círculos, marcando chaves primárias e evitando o caos de homônimos.",
+    content: `
+      <h2>Como Inserir Atributos no brModelo Web</h2>
+      <ol>
+        <li>Na barra lateral esquerda, clique no ícone de <strong>Círculo / Elipse</strong> (Atributo).</li>
+        <li>Clique próximo à entidade correspondente no Canvas.</li>
+        <li>Para ligar o atributo à entidade: selecione a ferramenta de <strong>Linha / Conector</strong>, clique na entidade e puxe até o círculo do atributo.</li>
+        <li>Dê duplo clique no círculo para dar um nome descritivo em minúsculas (ex: <code>preco_venda</code>, <code>descricao</code>, <code>data_cadastro</code>).</li>
+      </ol>
+
+      <h2>O Momento Mais Importante: A Bolinha Preta ⚫ (Identificador)</h2>
+      <p>Toda entidade do mundo precisa de um atributo que <strong>NUNCA se repete</strong>, a "impressão digital" do registro.</p>
+
+      <h3>Como transformar em Identificador no brModelo Web:</h3>
+      <ol>
+        <li>Clique sobre o círculo do atributo que será o ID (ex: <code>id_produto</code> ou <code>cnpj</code>).</li>
+        <li>No painel de propriedades na lateral direita da tela, localize a opção <strong>"Identificador"</strong> (ou <em>"Chave Primária"</em>).</li>
+        <li>Marque a caixinha de seleção (checkbox).</li>
+        <li><strong>Veja a mágica acontecer:</strong> o círculo ficará preenchido de <strong>PRETO SÓLIDO ⚫</strong>!</li>
+      </ol>
+
+      <div class="alert-box alert-info">
+        <span class="alert-icon">⚫</span>
+        <div>
+          <strong>Por que a Bolinha Preta é obrigatória?</strong> Se você não definir um identificador único para cada entidade, pessoas com nomes iguais (homônimos como <em>"Lucas da Silva"</em>) misturarão cadastros e compras no banco de dados!
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "passo-relacionamentos",
+    category: "2. Passo a Passo no Canvas Conceitual",
     icon: "🔗",
-    title: "Relacionamentos & As 2 Perguntas Mágicas das Cardinalidades",
-    description: "Losangos, verbos de negócio e o fim definitivo do terror do (0,n) e (1,1).",
+    title: "Como Ligar Entidades com Losangos e Cardinalidades",
+    description: "Inserindo relacionamentos, conectando linhas e configurando (0,n) e (1,1).",
     content: `
-      <h2>O que é um Relacionamento?</h2>
-      <p>Entidades isoladas são ilhas sem valor para a empresa. O <strong>Relacionamento</strong> é a conexão lógica que representa a regra de negócio unindo duas ou mais entidades. Graficamente, é desenhado como um <strong>LOSANGO</strong> contendo um verbo de ação em maiúsculas (ex: <code>FORNECE</code>, <code>COMPRA</code>, <code>CONTÉM</code>).</p>
+      <h2>Como Inserir um Relacionamento no brModelo Web</h2>
+      <ol>
+        <li>Na barra de ferramentas, clique no ícone de <strong>Losango</strong> (Relacionamento).</li>
+        <li>Clique no Canvas exatamente no espaço entre as duas entidades que conversam entre si.</li>
+        <li>Dê duplo clique dentro do losango e escreva um <strong>VERBO DE AÇÃO em maiúsculas</strong> (ex: <code>FORNECE</code>, <code>REALIZA</code>, <code>CONTÉM</code>, <code>PERTENCE</code>).</li>
+        <li>Selecione a ferramenta de <strong>Conector (Linha)</strong> e faça duas ligações:
+          <ul>
+            <li>Ligue a <strong>Entidade A ➔ Losango</strong>.</li>
+            <li>Ligue o <strong>Losango ➔ Entidade B</strong>.</li>
+          </ul>
+        </li>
+      </ol>
 
-      <h2>O Segredo das Cardinalidades: As 2 Perguntas Mágicas</h2>
-      <p>A cardinalidade define o número <strong>mínimo</strong> e <strong>máximo</strong> de vezes que uma entidade participa da relação. Para descobrir sem errar, aplique a técnica das duas perguntas em cada ponta:</p>
-
-      <div class="card-grid">
-        <div class="feature-card">
-          <div class="card-title">Pergunta 1: MÍNIMO (0 ou 1?)</div>
-          <div class="card-desc">
-            <em>"Essa entidade recém-cadastrada é OBRIGADA a já participar da relação hoje?"</em><br>
-            • Se <strong>NÃO</strong> é obrigada ➔ Mínimo = <strong>0</strong>.<br>
-            • Se <strong>SIM</strong>, é obrigatória ➔ Mínimo = <strong>1</strong>.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="card-title">Pergunta 2: MÁXIMO (1 ou N?)</div>
-          <div class="card-desc">
-            <em>"No limite máximo, ela pode se conectar com quantos elementos?"</em><br>
-            • Se no máximo <strong>UM</strong> ➔ Máximo = <strong>1</strong>.<br>
-            • Se pode se conectar a <strong>VÁRIOS</strong> ➔ Máximo = <strong>n</strong> (muitos).
-          </div>
+      <div class="alert-box alert-warn">
+        <span class="alert-icon">🚫</span>
+        <div>
+          <strong>Erro Clássico de Aluno no brModelo Web:</strong> NUNCA ligue um retângulo direto em outro retângulo com uma linha! No modelo de Peter Chen, duas entidades SEMPRE se comunicam através de um losango no meio.
         </div>
       </div>
 
-      <h3>Exemplo Real: CLIENTE faz PEDIDO</h3>
-      <ul>
-        <li><strong>Ponta do CLIENTE ➔ PEDIDO:</strong> O cliente acabou de baixar o app, precisa já ter pedido feito? Não (0). Pode fazer vários? Sim (n). Logo: <code>(0,n)</code>.</li>
-        <li><strong>Ponta do PEDIDO ➔ CLIENTE:</strong> Um pedido pode existir voando sem cliente? Não, precisa de dono (1). Um pedido pode pertencer a dois clientes diferentes? Não, é de um só (1). Logo: <code>(1,1)</code>.</li>
-      </ul>
+      <h2>Como Configurar a Cardinalidade nas Pontas das Linhas:</h2>
+      <ol>
+        <li>Ao ligar a linha, o brModelo Web coloca automaticamente um número padrão na ponta (como <code>(0,n)</code> ou <code>(1,1)</code>).</li>
+        <li>Dê um <strong>duplo clique sobre a sigla da cardinalidade</strong> na ponta da linha (ou selecione a linha e olhe o painel direito).</li>
+        <li>Escolha a cardinalidade correta de acordo com as regras de negócio:
+          <ul>
+            <li><code>(0,1)</code>: Mínimo 0 (opcional), Máximo 1.</li>
+            <li><code>(1,1)</code>: Mínimo 1 (obrigatório), Máximo 1.</li>
+            <li><code>(0,n)</code>: Mínimo 0 (opcional), Máximo muitos.</li>
+            <li><code>(1,n)</code>: Mínimo 1 (obrigatório), Máximo muitos.</li>
+          </ul>
+        </li>
+      </ol>
     `
   },
   {
-    id: "modelo-logico-relacional",
-    category: "3. Modelo Lógico (Ted Codd)",
-    icon: "📊",
-    title: "Modelo Lógico & As Regras de Mapeamento",
-    description: "Como o modelo conceitual vira tabelas, colunas, Primary Keys e Foreign Keys.",
+    id: "passo-especializacao",
+    category: "2. Passo a Passo no Canvas Conceitual",
+    icon: "🔱",
+    title: "Como Fazer Especialização / Generalização (Herança)",
+    description: "Criando o triângulo de herança, definindo subclasses e disjunção (d) ou sobreposição (o).",
     content: `
-      <h2>A Transição: Do Conceitual para o Lógico</h2>
-      <p>Enquanto o Modelo Conceitual foi feito para os seres humanos entenderem a regra de negócio, o <strong>Modelo Lógico</strong> foi formalizado por Edgar F. Codd em 1970 para ser implementado nos computadores através de tabelas relacionais.</p>
+      <h2>O que é Especialização / Generalização?</h2>
+      <p>É o mecanismo similar à herança da Orientação a Objetos. Usamos quando uma entidade genérica possui tipos específicos que compartilham atributos comuns, mas têm detalhes exclusivos.</p>
+      <p><em>Exemplo clássico:</em> <code>CLIENTE</code> é genérico. Mas pode se especializar em <code>PESSOA_FISICA</code> (tem CPF) ou <code>PESSOA_JURIDICA</code> (tem CNPJ).</p>
 
-      <h3>As 3 Regras de Transformação do MER para Lógico:</h3>
-      
-      <div class="card-grid">
-        <div class="feature-card">
-          <div class="card-title">1. Relacionamento 1 : 1</div>
-          <div class="card-desc">A chave primária de uma tabela migra como Chave Estrangeira (FK) para a outra, geralmente naquela de participação obrigatória.</div>
-        </div>
-        <div class="feature-card">
-          <div class="card-title">2. Relacionamento 1 : N</div>
-          <div class="card-desc"><strong>A regra do lado 'N':</strong> A Chave Primária (PK) do lado 1 SEMPRE migra para a tabela do lado N como Chave Estrangeira (FK). <em>Ex: id_cliente entra na tabela PEDIDO</em>.</div>
-        </div>
-        <div class="feature-card">
-          <div class="card-title">3. Relacionamento N : N</div>
-          <div class="card-desc"><strong>Nasce uma nova tabela associativa!</strong> O relacionamento vira uma tabela intermediária composta pelas duas chaves estrangeiras como chave primária composta. <em>Ex: item_pedido(id_pedido, id_produto, qtd)</em>.</div>
+      <h2>Como Fazer no brModelo Web (Passo a Passo):</h2>
+      <ol>
+        <li>Desenhe a entidade genérica pai (ex: <code>CLIENTE</code>).</li>
+        <li>Desenhe as duas entidades filhas abaixo dela (ex: <code>PESSOA_FISICA</code> e <code>PESSOA_JURIDICA</code>).</li>
+        <li>Na barra de ferramentas, clique no ícone de <strong>Triângulo / Especialização</strong> e coloque entre o pai e os filhos.</li>
+        <li>Conecte o pai à ponta superior do triângulo e os filhos às pontas inferiores.</li>
+        <li>No painel direito do triângulo, escolha as duas propriedades de ouro:
+          <ul>
+            <li><strong>Disjunção (d) vs Sobreposição (o):</strong>
+              <br>• <strong>(d) Disjunta:</strong> Um cliente é OU física OU jurídica, nunca os dois ao mesmo tempo.
+              <br>• <strong>(o) Sobreposta:</strong> Um elemento pode ser ambos (ex: um <code>FUNCIONARIO</code> que também é <code>ALUNO</code>).
+            </li>
+            <li><strong>Total (t) vs Parcial (p):</strong>
+              <br>• <strong>Total:</strong> Todo cliente OBRIGATORIAMENTE tem que ser física ou jurídica.
+              <br>• <strong>Parcial:</strong> Podem existir clientes que não se enquadram em nenhuma das duas categorias.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    `
+  },
+  {
+    id: "conversao-logico",
+    category: "3. Modelo Lógico & Conversão Automática",
+    icon: "⚡",
+    title: "O Botão Mágico: Convertendo Conceitual em Lógico",
+    description: "Como o brModelo Web gera as tabelas relacionais com chaves estrangeiras automaticamente.",
+    content: `
+      <h2>A Mágica da Conversão Automática</h2>
+      <p>Depois que o seu Modelo Conceitual (Peter Chen) estiver completo, com todas as entidades, identificadores ⚫ e relacionamentos com cardinalidades, você não precisa redesenhar tudo do zero para fazer o Modelo Lógico!</p>
+
+      <h2>Como Executar a Conversão no brModelo Web:</h2>
+      <ol>
+        <li>Com o seu modelo conceitual aberto no Canvas, olhe para a barra de menus superior.</li>
+        <li>Clique no botão <strong>"Converter para Lógico"</strong> (ícone com setas ou tabelas).</li>
+        <li>O brModelo Web criará automaticamente um <strong>novo modelo lógico</strong> em uma nova aba!</li>
+        <li><strong>O que o sistema faz automaticamente por você:</strong>
+          <ul>
+            <li>Cada retângulo de entidade vira uma <strong>TABELA</strong> relacional.</li>
+            <li>Cada círculo de atributo vira uma <strong>COLUNA</strong>.</li>
+            <li>O atributo com bolinha preta vira a <strong>PRIMARY KEY [PK]</strong>.</li>
+            <li>Nas relações 1:N, a chave primária do lado 1 migra automaticamente para o lado N como <strong>FOREIGN KEY [FK]</strong>!</li>
+            <li>Nas relações N:N, o sistema cria automaticamente uma nova <strong>tabela associativa intermediária</strong>!</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="alert-box alert-tip">
+        <span class="alert-icon">🎯</span>
+        <div>
+          <strong>Dica do Professor:</strong> Após a conversão, sempre faça uma revisão visual nas tabelas geradas para conferir se todas as Foreign Keys (FKs) receberam os nomes adequados antes de gerar o SQL final.
         </div>
       </div>
     `
   },
   {
-    id: "projeto-fisico-sql",
-    category: "4. Projeto Físico & SQL DDL",
+    id: "gerar-sql-fisico",
+    category: "4. Projeto Físico & Código SQL",
     icon: "💻",
-    title: "Geração de Código SQL (DDL)",
-    description: "Como converter o modelo lógico em scripts CREATE TABLE para MySQL Workbench.",
+    title: "Como Gerar o Script SQL DDL para o MySQL",
+    description: "Exportando CREATE TABLE com chaves primárias e constraints para o MySQL Workbench.",
     content: `
-      <h2>Do Diagrama para o Código SQL</h2>
-      <p>No final do fluxo de engenharia, o brModelo web permite exportar o script DDL (<em>Data Definition Language</em>). Esse script é o código real executado no MySQL Workbench ou PostgreSQL para criar fisicamente os arquivos no disco SSD.</p>
+      <h2>Gerando o Código SQL no brModelo Web</h2>
+      <ol>
+        <li>Abra o seu <strong>Modelo Lógico</strong> gerado na etapa anterior.</li>
+        <li>No menu superior, clique no botão <strong>"Gerar Físico"</strong> (ou <em>"Gerar Código SQL"</em>).</li>
+        <li>Selecione o SGBD alvo (escolha <strong>MySQL</strong> ou <strong>PostgreSQL</strong>).</li>
+        <li>Uma janela se abrirá contendo todo o script com os comandos <code>CREATE TABLE</code>, tipos de dados, <code>PRIMARY KEY</code> e <code>FOREIGN KEY</code> com integridade referencial!</li>
+        <li>Clique em <strong>"Copiar Código"</strong>.</li>
+      </ol>
 
-      <h3>Exemplo de DDL Gerado para MySQL:</h3>
-      <div class="code-container">
-        <div class="code-header">
-          <span>schema_estoque.sql</span>
-          <button class="code-copy-btn" onclick="navigator.clipboard.writeText('CREATE DATABASE estoque_db;')">Copiar</button>
+      <h2>Como Rodar no MySQL Workbench (Laboratório do SENAI):</h2>
+      <ol>
+        <li>Abra o <strong>MySQL Workbench</strong> no computador do laboratório.</li>
+        <li>Conecte-se na sua instância local (<code>localhost:3306</code>).</li>
+        <li>Abra uma nova aba de Query SQL (atalho: <code>Ctrl + T</code>).</li>
+        <li>Cole o código gerado pelo brModelo Web.</li>
+        <li>Adicione no topo as duas linhas protetivas:
+          <pre><code>CREATE DATABASE IF NOT EXISTS estoque_db;
+USE estoque_db;</code></pre>
+        </li>
+        <li>Pressione o botão do Raio ⚡ (ou <code>Ctrl + Shift + Enter</code>) para executar e ver todas as tabelas criadas no banco de verdade!</li>
+      </ol>
+    `
+  },
+  {
+    id: "anatomia-elementos",
+    category: "3. Modelo Lógico & Conversão Automática",
+    icon: "📐",
+    title: "Dicionário Visual: Símbolos de Peter Chen vs Modelo Lógico",
+    description: "Tabela comparativa dos símbolos conceituais e como eles viram tabelas no modelo lógico.",
+    content: `
+      <h2>Equivalência entre Notação de Peter Chen e Modelo Lógico</h2>
+      <p>Compreenda como cada elemento conceitual se traduz nas estruturas relacionais desenvolvidas por Edgar F. Codd:</p>
+
+      <div class="card-grid">
+        <div class="feature-card">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Retângulo (Entidade)</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Vira uma <strong>TABELA</strong> relacional (ex: tabela <code>cliente</code>). Representa um conjunto de tuplas/linhas.</div>
         </div>
-        <pre><code>CREATE DATABASE IF NOT EXISTS estoque_db
-CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+        <div class="feature-card">
+          <div class="card-icon">⚫</div>
+          <div class="card-title">Círculo Preto (Identificador)</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Vira a <strong>PRIMARY KEY [PK]</strong>. O campo que garante que nenhuma linha se repita no banco.</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">⚪</div>
+          <div class="card-title">Círculo Branco (Atributo Comum)</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Vira uma <strong>COLUNA</strong> comum na tabela (ex: <code>nome</code>, <code>preco</code>, <code>data_cadastro</code>).</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">🔗</div>
+          <div class="card-title">Losango 1:N</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Vira uma <strong>FOREIGN KEY [FK]</strong> na tabela do lado N, apontando para a PK do lado 1.</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">🔀</div>
+          <div class="card-title">Losango N:N</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Vira uma <strong>NOVA TABELA ASSOCIATIVA</strong> contendo as duas chaves estrangeiras combinadas.</div>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">🔱</div>
+          <div class="card-title">Triângulo (Herança)</div>
+          <div class="card-desc"><strong>No Lógico:</strong> Pode virar uma tabela por subclasse (com a mesma PK da mãe como PK/FK) ou uma tabela única unificada.</div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "regras-transformacao",
+    category: "3. Modelo Lógico & Conversão Automática",
+    icon: "📜",
+    title: "As 3 Regras de Ouro da Conversão para o Modelo Lógico",
+    description: "Entenda o que o brModelo Web faz por trás dos panos nas relações 1:1, 1:N e N:N.",
+    content: `
+      <h2>As 3 Regras que Todo Estudante Precisa Dominar:</h2>
+      
+      <h3>Regra 1: Relacionamento 1:N (Um para Muitos)</h3>
+      <p>É o tipo mais comum no dia a dia (ex: <code>CLIENTE (1) --- REALIZA --- (N) PEDIDO</code>).</p>
+      <div class="alert-box alert-tip">
+        <span class="alert-icon">💡</span>
+        <div>
+          <strong>A Regra:</strong> A Chave Primária [PK] do lado "1" <strong>SEMPRE MIGRA</strong> para a tabela do lado "N" como Chave Estrangeira [FK].<br>
+          <em>Resultado:</em> A tabela <code>PEDIDO</code> ganha a coluna <code>id_cliente [FK]</code>!
+        </div>
+      </div>
 
-USE estoque_db;
+      <h3>Regra 2: Relacionamento N:N (Muitos para Muitos)</h3>
+      <p>Exemplo clássico: <code>PRODUTO (N) --- COMPÕE --- (N) PEDIDO</code>.</p>
+      <div class="alert-box alert-info">
+        <span class="alert-icon">✨</span>
+        <div>
+          <strong>A Regra:</strong> O relacionamento N:N <strong>SEMPRE CRIA UMA NOVA TABELA</strong> (Tabela Associativa).<br>
+          <em>Resultado:</em> Nasce a tabela <code>ITEM_PEDIDO</code> contendo <code>id_pedido [FK]</code> + <code>id_produto [FK]</code> e atributos da transação (como <code>quantidade</code> e <code>preco_unitario</code>).
+        </div>
+      </div>
 
-CREATE TABLE FORNECEDOR (
-    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
-    razao_social VARCHAR(150) NOT NULL,
-    cnpj VARCHAR(18) NOT NULL UNIQUE,
-    telefone VARCHAR(20)
-) ENGINE=InnoDB;
-
-CREATE TABLE PRODUTO (
-    id_produto INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(120) NOT NULL,
-    preco_venda DECIMAL(10,2) NOT NULL,
-    id_fornecedor INT NOT NULL,
-    CONSTRAINT fk_produto_fornecedor
-        FOREIGN KEY (id_fornecedor) 
-        REFERENCES FORNECEDOR(id_fornecedor)
-        ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB;</code></pre>
+      <h3>Regra 3: Relacionamento 1:1 (Um para Um)</h3>
+      <p>Exemplo: <code>FUNCIONARIO (1) --- GERE --- (1) DEPARTAMENTO</code>.</p>
+      <div class="alert-box alert-warn">
+        <span class="alert-icon">🔍</span>
+        <div>
+          <strong>A Regra:</strong> A Chave Primária de qualquer um dos dois lados pode migrar para o outro lado, mas a boa prática recomenda migrar a chave para a entidade com participação <strong>obrigatória</strong> (mínimo = 1).
+        </div>
       </div>
     `
   }
