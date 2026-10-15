@@ -2,7 +2,7 @@
 ### Plataforma de Apoio Pedagógico e Modelagem de Banco de Dados para Estudantes de TI
 **Instituição:** SESI SENAI (Curso Técnico em Desenvolvimento de Sistemas)  
 **Docente:** Prof. Jefferson Miguel Dallalibera  
-**Link do GitHub Pages:** *Disponível após publicação na branch `main` (Settings > Pages).*
+**Link do GitHub Pages:** [https://jeffersondallalibera.github.io/senai-brmw/](https://jeffersondallalibera.github.io/senai-brmw/)
 
 ---
 
